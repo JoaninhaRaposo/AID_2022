@@ -24,25 +24,48 @@ CREATE TABLE dim_to_airport (
 
 CREATE TABLE dim_from_time (
     from_time_id DATETIME,
+    day INT,
+    month INT,
     year INT,
-    QTR_ID INT,
-    QTR_NAME VARCHAR(255),
-    MONTH_ID INT,
-    MONTH_NAME VARCHAR(255),
-    PRIMARY KEY (TIME_ID)
+    PRIMARY KEY (from_time_id)
 );
 
-CREATE TABLE fact_order (
-    ORDERNUMBER INT,
-    ORDERLINENUMBER INT,
-    QUANTITYORDERED INT,
-    PRICEEACH DOUBLE,
-    LINETOTAL DOUBLE,
-    CUSTOMERNUMBER INT,
-    PRODUCT_ID INT,
-    TIME_ID DATETIME,
-    PRIMARY KEY (ORDERNUMBER,ORDERLINENUMBER),
-    FOREIGN KEY (CUSTOMERNUMBER) REFERENCES dim_customer (CUSTOMERNUMBER),
-    FOREIGN KEY (PRODUCT_ID) REFERENCES dim_product (PRODUCT_ID),
-    FOREIGN KEY (TIME_ID) REFERENCES dim_time (TIME_ID)
+CREATE TABLE dim_to_time (
+    to_time_id DATETIME,
+    day INT,
+    month INT,
+    year INT,
+    PRIMARY KEY (to_time_id)
+);
+
+CREATE TABLE dim_airplane (
+    airplane_id INT,
+    type_id INT, /*not sure about if should be string or INT... According to slack it seems to be type_i*/
+    PRIMARY KEY (airplane_id)
+);
+
+CREATE TABLE dim_airline (
+    airline_id INT,
+    airline_name VARCHAR(30),
+    PRIMARY KEY (airline_id)
+);
+
+
+CREATE TABLE fact_flight (
+    flight_id INT,
+    passenger_no INT,
+    total_revenue INT,
+    from_airport_id INT,
+    to_airport_id INT,
+    from_time_id DATETIME,
+    to_time_id DATETIME,
+    airline_id INT,
+    airplane_id INT,
+    PRIMARY KEY (flight_id),
+    FOREIGN KEY (from_airport_id) REFERENCES dim_from_airport (from_airport_id),
+    FOREIGN KEY (to_airport_id) REFERENCES dim_to_airport (to_airport_id),
+    FOREIGN KEY (from_time_id) REFERENCES dim_from_time (from_time_id),
+    FOREIGN KEY (to_time_id) REFERENCES dim_to_time (to_time_id),
+    FOREIGN KEY (airline_id) REFERENCES dim_airline (airline_id),
+    FOREIGN KEY (airplane_id) REFERENCES dim_airplane (airplane_id)
 );
