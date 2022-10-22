@@ -40,7 +40,7 @@ CREATE TABLE dim_to_time (
 
 CREATE TABLE dim_airplane (
     airplane_id INT,
-    type_id INT, /*not sure about if should be string or INT... According to slack it seems to be type_i*/
+    type_id INT, /*not sure about if should be string or INT... According to slack it seems to be type_i*/ /* we might need to put both the type_id(INT) and the identifier (string) because the first one is an identifier and the second one the name of the plane type which is useful info*/
     PRIMARY KEY (airplane_id)
 );
 
@@ -54,7 +54,7 @@ CREATE TABLE dim_airline (
 CREATE TABLE fact_flight (
     flight_id INT,
     passenger_no INT,
-    total_revenue INT,
+    total_revenue DOUBLE,
     from_airport_id INT,
     to_airport_id INT,
     from_time_id DATETIME,
