@@ -575,7 +575,7 @@
     <hop>
       <from>Group by</from>
       <to>Insert / update</to>
-      <enabled>Y</enabled>
+      <enabled>N</enabled>
     </hop>
   </order>
   <step>
@@ -644,6 +644,89 @@
     </remotesteps>
     <GUI>
       <xloc>688</xloc>
+      <yloc>224</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>Insert / update</name>
+    <type>InsertUpdate</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <connection>airports_dw</connection>
+    <commit>100</commit>
+    <update_bypassed>N</update_bypassed>
+    <lookup>
+      <schema>airports_dw</schema>
+      <table>fact_flight</table>
+      <key>
+        <name>flight_id</name>
+        <field>flight_id</field>
+        <condition>=</condition>
+        <name2/>
+      </key>
+      <value>
+        <name>flight_id</name>
+        <rename>flight_id</rename>
+        <update>Y</update>
+      </value>
+      <value>
+        <name>to_airport_id</name>
+        <rename>to</rename>
+        <update>Y</update>
+      </value>
+      <value>
+        <name>to_time_id</name>
+        <rename>arrival</rename>
+        <update>Y</update>
+      </value>
+      <value>
+        <name>from_airport_id</name>
+        <rename>from</rename>
+        <update>Y</update>
+      </value>
+      <value>
+        <name>from_time_id</name>
+        <rename>departure</rename>
+        <update>Y</update>
+      </value>
+      <value>
+        <name>passenger_no</name>
+        <rename>n_passengers</rename>
+        <update>Y</update>
+      </value>
+      <value>
+        <name>total_revenue</name>
+        <rename>revenue_total</rename>
+        <update>Y</update>
+      </value>
+      <value>
+        <name>airline_id</name>
+        <rename>airline_id</rename>
+        <update>Y</update>
+      </value>
+      <value>
+        <name>airplane_id</name>
+        <rename>airplane_id</rename>
+        <update>Y</update>
+      </value>
+    </lookup>
+    <attributes/>
+    <cluster_schema/>
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>768</xloc>
       <yloc>224</yloc>
       <draw>Y</draw>
     </GUI>
@@ -939,89 +1022,6 @@ FROM airports.flight NATURAL JOIN airports.booking
     </remotesteps>
     <GUI>
       <xloc>512</xloc>
-      <yloc>224</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
-  <step>
-    <name>Insert / update</name>
-    <type>InsertUpdate</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name/>
-    </partitioning>
-    <connection>airports_dw</connection>
-    <commit>100</commit>
-    <update_bypassed>N</update_bypassed>
-    <lookup>
-      <schema>airports_dw</schema>
-      <table>fact_flight</table>
-      <key>
-        <name>flight_id</name>
-        <field>flight_id</field>
-        <condition>=</condition>
-        <name2/>
-      </key>
-      <value>
-        <name>flight_id</name>
-        <rename>flight_id</rename>
-        <update>Y</update>
-      </value>
-      <value>
-        <name>to_airport_id</name>
-        <rename>to</rename>
-        <update>Y</update>
-      </value>
-      <value>
-        <name>to_time_id</name>
-        <rename>arrival</rename>
-        <update>Y</update>
-      </value>
-      <value>
-        <name>from_airport_id</name>
-        <rename>from</rename>
-        <update>Y</update>
-      </value>
-      <value>
-        <name>from_time_id</name>
-        <rename>departure</rename>
-        <update>Y</update>
-      </value>
-      <value>
-        <name>passenger_no</name>
-        <rename>n_passengers</rename>
-        <update>Y</update>
-      </value>
-      <value>
-        <name>total_revenue</name>
-        <rename>revenue_total</rename>
-        <update>Y</update>
-      </value>
-      <value>
-        <name>airline_id</name>
-        <rename>airline_id</rename>
-        <update>Y</update>
-      </value>
-      <value>
-        <name>airplane_id</name>
-        <rename>airplane_id</rename>
-        <update>Y</update>
-      </value>
-    </lookup>
-    <attributes/>
-    <cluster_schema/>
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>768</xloc>
       <yloc>224</yloc>
       <draw>Y</draw>
     </GUI>
