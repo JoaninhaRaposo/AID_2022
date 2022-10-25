@@ -1,0 +1,74 @@
+<Schema name="airports_dw">
+  <Cube name="Flights" visible="true" cache="true" enabled="true">
+    <Table name="fact_flight">
+    </Table>
+    <Dimension type="StandardDimension" visible="true" foreignKey="airline_id" name="Airline">
+      <Hierarchy name="Airline Hierarchy" visible="true" hasAll="true" allMemberName="All Airlines" primaryKey="airline_id">
+        <Table name="dim_airline">
+        </Table>
+        <Level name="Airline Name" visible="true" column="airline_name" type="String" uniqueMembers="false" levelType="Regular">
+        </Level>
+      </Hierarchy>
+    </Dimension>
+    <Dimension type="StandardDimension" visible="true" foreignKey="airplane_id" name="Airplane">
+      <Hierarchy name="Airplane Hierarchy" visible="true" hasAll="true" allMemberName="All Airplanes" primaryKey="airplane_id">
+        <Table name="dim_airplane">
+        </Table>
+        <Level name="Type" visible="true" column="type_id" type="Integer" uniqueMembers="false" levelType="Regular">
+        </Level>
+      </Hierarchy>
+    </Dimension>
+    <Dimension type="StandardDimension" visible="true" foreignKey="from_airport_id" name="From Airport">
+      <Hierarchy name="From Airport Hierarchy" visible="true" hasAll="true" allMemberName="All From Airports" primaryKey="from_airport_id">
+        <Table name="dim_from_airport">
+        </Table>
+        <Level name="From Airport Country" visible="true" column="from_airport_country" type="String" uniqueMembers="false" levelType="Regular">
+        </Level>
+        <Level name="From Airport City" visible="true" column="from_airport_city" type="String" uniqueMembers="false" levelType="Regular">
+        </Level>
+        <Level name="From Airport Name" visible="true" column="from_airport_name" type="String" uniqueMembers="false" levelType="Regular">
+        </Level>
+      </Hierarchy>
+    </Dimension>
+    <Dimension type="StandardDimension" visible="true" foreignKey="to_airport_id" name="To Airport">
+      <Hierarchy name="To Airport Hierarchy" visible="true" hasAll="true" primaryKey="to_airport_id">
+        <Table name="dim_to_airport">
+        </Table>
+        <Level name="To Airport Country" visible="true" column="to_airport_country" type="String" uniqueMembers="false" levelType="Regular">
+        </Level>
+        <Level name="To Airport City" visible="true" column="to_airport_city" type="String" uniqueMembers="false" levelType="Regular">
+        </Level>
+        <Level name="To Airport Name" visible="true" column="to_airport_name" type="String" uniqueMembers="false" levelType="Regular">
+        </Level>
+      </Hierarchy>
+    </Dimension>
+    <Dimension type="TimeDimension" visible="true" foreignKey="from_time_id" name="From Time">
+      <Hierarchy name="From Time Hierarchy" visible="true" hasAll="true" allMemberName="All From Time" primaryKey="from_time_id">
+        <Table name="dim_from_time">
+        </Table>
+        <Level name="Year" visible="true" column="year" type="Integer" uniqueMembers="false" levelType="TimeYears">
+        </Level>
+        <Level name="Month" visible="true" column="month" type="Integer" uniqueMembers="false" levelType="TimeMonths">
+        </Level>
+        <Level name="Day" visible="true" column="day" type="Integer" uniqueMembers="false" levelType="TimeDays">
+        </Level>
+      </Hierarchy>
+    </Dimension>
+    <Dimension type="TimeDimension" visible="true" foreignKey="to_time_id" name="To Time">
+      <Hierarchy name="To Time Hierarchy" visible="true" hasAll="true" allMemberName="All To Times" primaryKey="to_time_id">
+        <Table name="dim_to_time">
+        </Table>
+        <Level name="Year" visible="true" column="year" type="Integer" uniqueMembers="false" levelType="TimeYears">
+        </Level>
+        <Level name="Month" visible="true" column="month" type="Integer" uniqueMembers="false" levelType="TimeMonths">
+        </Level>
+        <Level name="Days" visible="true" column="day" type="Integer" uniqueMembers="false" levelType="TimeDays">
+        </Level>
+      </Hierarchy>
+    </Dimension>
+    <Measure name="Number of Passengers" column="passenger_no" datatype="Integer" aggregator="sum" visible="true">
+    </Measure>
+    <Measure name="Total Revenue" column="total_revenue" datatype="Numeric" formatString="$ #,###.##" aggregator="sum" visible="true">
+    </Measure>
+  </Cube>
+</Schema>
