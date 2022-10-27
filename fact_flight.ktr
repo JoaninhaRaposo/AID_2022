@@ -577,6 +577,11 @@
       <to>Insert / update</to>
       <enabled>N</enabled>
     </hop>
+    <hop>
+      <from>Group by</from>
+      <to>Insert / update</to>
+      <enabled>Y</enabled>
+    </hop>
   </order>
   <step>
     <name>Group by</name>
